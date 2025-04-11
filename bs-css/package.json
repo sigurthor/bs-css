@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "jest": "^27.0.0",
-    "rescript": "12.0.0-alpha.11"
+    "rescript": "^11.1.4"
   },
   "jest": {
     "testPathIgnorePatterns": [

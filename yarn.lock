@@ -1242,7 +1242,7 @@ __metadata:
   resolution: "bs-css-dom@workspace:bs-css-dom"
   dependencies:
     bs-css: "npm:18.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   peerDependencies:
     "@rescript/react": ^0.10.0
     react: ^17.0.0
@@ -1257,7 +1257,7 @@ __metadata:
     "@emotion/cache": "npm:^11.0.0"
     "@emotion/css": "npm:^11.0.0"
     bs-css: "npm:18.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   languageName: unknown
   linkType: soft
 
@@ -1269,7 +1269,7 @@ __metadata:
     fela: "npm:^11.0.0"
     react: "npm:^17.0.0"
     react-fela: "npm:^11.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   languageName: unknown
   linkType: soft
 
@@ -1278,7 +1278,7 @@ __metadata:
   resolution: "bs-css@workspace:bs-css"
   dependencies:
     jest: "npm:^27.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   languageName: unknown
   linkType: soft
 
@@ -1596,7 +1596,7 @@ __metadata:
     esbuild: "npm:^0.9.0"
     react: "npm:^17.0.0"
     react-dom: "npm:^17.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   languageName: unknown
   linkType: soft
 
@@ -1610,7 +1610,7 @@ __metadata:
     esbuild: "npm:^0.9.0"
     react: "npm:^17.0.0"
     react-dom: "npm:^17.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   languageName: unknown
   linkType: soft
 
@@ -1626,7 +1626,7 @@ __metadata:
     react: "npm:^17.0.0"
     react-dom: "npm:^17.0.0"
     react-fela: "npm:^11.0.0"
-    rescript: "npm:12.0.0-alpha.11"
+    rescript: "npm:^11.1.4"
   languageName: unknown
   linkType: soft
 
@@ -3745,16 +3745,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rescript@npm:12.0.0-alpha.11":
-  version: 12.0.0-alpha.11
-  resolution: "rescript@npm:12.0.0-alpha.11"
+"rescript@npm:^11.1.4":
+  version: 11.1.4
+  resolution: "rescript@npm:11.1.4"
   bin:
-    bsc: cli/bsc.js
-    bstracing: lib/bstracing.js
-    rescript: cli/rescript.js
-    rescript-tools: cli/rescript-tools.js
-    rewatch: cli/rewatch.js
-  checksum: 10c0/013a2185bcce2c7322a23868fa9798f064c2dde260ac9bc699cc017abaed9f8bb3cced92bccdf015d6301d53f93b23797842e59f6535d757d35afd606bf5fa4f
+    bsc: bsc
+    bstracing: lib/bstracing
+    rescript: rescript
+  checksum: 10c0/7f12186a84209f586457a60e65755fcdfbcbb503ac805c60ab5132ce4c927bc264c3b851419ed5498ba7dc4066723377bb7453f893f482a0ccd424986d02beba
   languageName: node
   linkType: hard
 

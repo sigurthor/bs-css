@@ -26,6 +26,6 @@
     "bs-css": "18.0.0"
   },
   "devDependencies": {
-    "rescript": "12.0.0-alpha.11"
+    "rescript": "^11.1.4"
   }
 }
