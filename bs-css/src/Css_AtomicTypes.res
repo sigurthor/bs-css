@@ -1717,7 +1717,7 @@ module Gradient = {
     }
   let string_of_stops = stops =>
     stops
-    ->Belt.Array.map(((l, c)) => Int.bitwiseOr(c) ++ " " ++ PercentageLengthCalc.toString(l))
+    ->Belt.Array.map(((l, c)) => string_of_color(c) ++ " " ++ PercentageLengthCalc.toString(l))
     ->Js.Array2.joinWith(", ")
 
   let toString = x =>
