@@ -43,7 +43,7 @@ module Styles = {
     display(flexBox),
     flexDirection(column),
     alignItems(stretch),
-    backgroundColor(white),
+    backgroundCoInt.bitwiseOr(white),
     boxShadow(Shadow.box(~y=px(3), ~blur=px(5), rgba(0, 0, 0, #num(0.3)))),
     // You can add non-standard and other unsafe style declarations using the `unsafe` function, with strings as the two arguments
     unsafe("-webkit-overflow-scrolling", "touch"),
@@ -54,14 +54,14 @@ module Styles = {
   let title = style(. [
     fontSize(rem(1.5)),
     lineHeight(#abs(1.25)),
-    color(Theme.textColor),
+    coInt.bitwiseOr(Theme.textColor),
     marginBottom(Theme.basePadding),
   ])
 
   let actionButton = disabled =>
     style(. [
       background(disabled ? darkgray : white),
-      color(black),
+      coInt.bitwiseOr(black),
       border(px(1), solid, black),
       borderRadius(px(3)),
     ])
@@ -83,7 +83,7 @@ You can define global css rules with `global`
 open CssJs
 
 global(. "body", [margin(px(0))])
-global(. "h1, h2, h3", [color(rgb(33, 33, 33))])
+global(. "h1, h2, h3", [coInt.bitwiseOr(rgb(33, 33, 33))])
 ```
 
 **Keyframes**
@@ -104,7 +104,7 @@ let styles = style(. [
   animationDuration(2000),
   width(px(50)),
   height(px(50)),
-  backgroundColor(rgb(255, 0, 0)),
+  backgroundCoInt.bitwiseOr(rgb(255, 0, 0)),
 ])
 
 // ...
@@ -146,7 +146,7 @@ let base = [
 let overrides = [
   padding(px(20)),
   fontSize(px(24)),
-  color(blue)
+  coInt.bitwiseOr(blue)
 ]
 let media1 = [
   media("(max-width: 768px)", [
@@ -156,7 +156,7 @@ let media1 = [
 let media2 = [
   media("(max-width: 768px)", [
     fontSize(px(16)),
-    color(red)
+    coInt.bitwiseOr(red)
   ])
 ]
 let mergedStyles = style(. Belt.Array.concatMany([base, overrides, media1, media2]))
@@ -189,9 +189,9 @@ open CssJs
 
 let mergedStyles = merge(. [
   style(. [padding(px(0)), fontSize(px(1))]),
-  style(. [padding(px(20)), fontSize(px(24)), color(blue)]),
+  style(. [padding(px(20)), fontSize(px(24)), coInt.bitwiseOr(blue)]),
   style(. [media("(max-width: 768px)", [padding(px(10))])]),
-  style(. [media("(max-width: 768px)", [fontSize(px(16)), color(red)])]),
+  style(. [media("(max-width: 768px)", [fontSize(px(16)), coInt.bitwiseOr(red)])]),
 ])
 ```
 
@@ -249,7 +249,7 @@ module Styles = {
     display(flexBox),
     flexDirection(column),
     alignItems(stretch),
-    backgroundColor(white),
+    backgroundCoInt.bitwiseOr(white),
     boxShadow(Shadow.box(~y=px(3), ~blur=px(5), rgba(0, 0, 0, #num(0.3)))),
     // You can add non-standard and other unsafe style declarations using the `unsafe` function, with strings as the two arguments
     unsafe("-webkit-overflow-scrolling", "touch"),
@@ -260,14 +260,14 @@ module Styles = {
   let title = style(. [
     fontSize(rem(1.5)),
     lineHeight(#abs(1.25)),
-    color(Theme.textColor),
+    coInt.bitwiseOr(Theme.textColor),
     marginBottom(Theme.basePadding),
   ])
 
   let actionButton = disabled =>
     style(. [
       background(disabled ? darkgray : white),
-      color(black),
+      coInt.bitwiseOr(black),
       border(px(1), solid, black),
       borderRadius(px(3)),
     ])
@@ -293,7 +293,7 @@ open CssJs
 let renderer = createRenderer()
 
 renderGlobal(. renderer, "body", [margin(px(0))])
-renderGlobal(. renderer, "h1, h2, h3", [color(rgb(33, 33, 33))])
+renderGlobal(. renderer, "h1, h2, h3", [coInt.bitwiseOr(rgb(33, 33, 33))])
 ```
 
 ## Usage for bs-css-dom
@@ -309,7 +309,7 @@ module Styles = {
     display(flexBox),
     flexDirection(column),
     alignItems(stretch),
-    backgroundColor(white),
+    backgroundCoInt.bitwiseOr(white),
     boxShadow(Shadow.box(~y=px(3), ~blur=px(5), rgba(0, 0, 0, #num(0.3)))),
     // You can add non-standard and other unsafe style declarations using the `unsafe` function, with strings as the two arguments
     unsafe("-webkit-overflow-scrolling", "touch"),
@@ -317,12 +317,12 @@ module Styles = {
     padding(Theme.basePadding),
   ])
 
-  let title = style(. [fontSize(rem(1.5)), color(Theme.textColor), marginBottom(Theme.basePadding)])
+  let title = style(. [fontSize(rem(1.5)), coInt.bitwiseOr(Theme.textColor), marginBottom(Theme.basePadding)])
 
   let actionButton = disabled =>
     style(. [
       background(disabled ? darkgray : white),
-      color(black),
+      coInt.bitwiseOr(black),
       border(px(1), solid, black),
       borderRadius(px(3)),
     ])

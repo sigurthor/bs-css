@@ -1394,7 +1394,7 @@ module GridTemplateAreas = {
     switch x {
     | #none => "none"
     | #areas(items) =>
-      String.trim(Belt.Array.reduceU(items, "", (. carry, item) => carry ++ "'" ++ item ++ "' "))
+      String.trim(Array.reduce(items, "", (. carry, item) => carry ++ "'" ++ item ++ "' "))
     }
 }
 
@@ -1417,12 +1417,12 @@ module GridArea = {
     switch t {
     | #auto => "auto"
     | #ident(s) => s
-    | #num(i) => string_of_int(i)
-    | #numIdent(i, s) => string_of_int(i) ++ " " ++ s
+    | #num(i) => Int.toString(i)
+    | #numIdent(i, s) => Int.toString(i) ++ " " ++ s
     | #span(e) =>
       "span " ++
       switch e {
-      | #num(i) => string_of_int(i)
+      | #num(i) => Int.toString(i)
       | #ident(s) => s
       }
     }
@@ -1449,24 +1449,24 @@ module BackdropFilter = {
   let toString = x =>
     switch x {
     | #blur(#...Length.t as b) => "blur(" ++ Length.toString(b) ++ ")"
-    | #brightness(#num(b)) => "brightness(" ++ string_of_int(b) ++ ")"
+    | #brightness(#num(b)) => "brightness(" ++ Int.toString(b) ++ ")"
     | #brightness(#percent(b)) => "brightness(" ++ string_of_percent(b) ++ ")"
-    | #contrast(#num(c)) => "contrast(" ++ string_of_int(c) ++ ")"
+    | #contrast(#num(c)) => "contrast(" ++ Int.toString(c) ++ ")"
     | #contrast(#percent(c)) => "contrast(" ++ string_of_percent(c) ++ ")"
-    | #dropShadow(#num(i)) => "drop-shadow(" ++ string_of_int(i) ++ ")"
+    | #dropShadow(#num(i)) => "drop-shadow(" ++ Int.toString(i) ++ ")"
     | #dropShadow(#percent(i)) => "drop-shadow(" ++ string_of_percent(i) ++ ")"
-    | #grayscale(#num(i)) => "grayscale(" ++ string_of_int(i) ++ ")"
+    | #grayscale(#num(i)) => "grayscale(" ++ Int.toString(i) ++ ")"
     | #grayscale(#percent(i)) => "grayscale(" ++ string_of_percent(i) ++ ")"
     | #hueRotate(#...Angle.t as h) => "hue-rotate(" ++ Angle.toString(h) ++ ")"
     | #hueRotate(#zero) => "hue-rotate(0deg)"
-    | #invert(#num(i)) => "invert(" ++ string_of_int(i) ++ ")"
+    | #invert(#num(i)) => "invert(" ++ Int.toString(i) ++ ")"
     | #invert(#percent(i)) => "invert(" ++ string_of_percent(i) ++ ")"
     | #none => "none"
-    | #opacity(#num(i)) => "opacity(" ++ string_of_int(i) ++ ")"
+    | #opacity(#num(i)) => "opacity(" ++ Int.toString(i) ++ ")"
     | #opacity(#percent(i)) => "opacity(" ++ string_of_percent(i) ++ ")"
-    | #saturate(#num(i)) => "saturate(" ++ string_of_int(i) ++ ")"
+    | #saturate(#num(i)) => "saturate(" ++ Int.toString(i) ++ ")"
     | #saturate(#percent(i)) => "saturate(" ++ string_of_percent(i) ++ ")"
-    | #sepia(#num(i)) => "sepia(" ++ string_of_int(i) ++ ")"
+    | #sepia(#num(i)) => "sepia(" ++ Int.toString(i) ++ ")"
     | #sepia(#percent(i)) => "sepia(" ++ string_of_percent(i) ++ ")"
     }
 }
@@ -1717,7 +1717,7 @@ module Gradient = {
     }
   let string_of_stops = stops =>
     stops
-    ->Belt.Array.map(((l, c)) => string_of_color(c) ++ " " ++ PercentageLengthCalc.toString(l))
+    ->Belt.Array.map(((l, c)) => string_of_coInt.bitwiseOr(c) ++ " " ++ PercentageLengthCalc.toString(l))
     ->Js.Array2.joinWith(", ")
 
   let toString = x =>
@@ -1955,7 +1955,7 @@ module CounterIncrement = {
   let toString = x =>
     switch x {
     | #none => "none"
-    | #increment(name, value) => name ++ " " ++ string_of_int(value)
+    | #increment(name, value) => name ++ " " ++ Int.toString(value)
     }
 }
 
@@ -1967,7 +1967,7 @@ module CounterReset = {
   let toString = x =>
     switch x {
     | #none => "none"
-    | #reset(name, value) => name ++ " " ++ string_of_int(value)
+    | #reset(name, value) => name ++ " " ++ Int.toString(value)
     }
 }
 
@@ -1979,7 +1979,7 @@ module CounterSet = {
   let toString = x =>
     switch x {
     | #none => "none"
-    | #set(name, value) => name ++ " " ++ string_of_int(value)
+    | #set(name, value) => name ++ " " ++ Int.toString(value)
     }
 }
 

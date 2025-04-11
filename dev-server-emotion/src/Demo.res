@@ -22,9 +22,9 @@ let miniBox = [border(2->px, solid, black), width(15->px), height(15->px), margi
 
 let mergedStyles = merge(. [
   style(. [padding(0->px), fontSize(1->px)]),
-  style(. [padding(20->px), fontSize(24->px), color(blue)]),
+  style(. [padding(20->px), fontSize(24->px), coInt.bitwiseOr(blue)]),
   style(. [media(. "(max-width: 768px)", [padding(10->px)])]),
-  style(. [media(. "(max-width: 768px)", [fontSize(16->px), color(red)])]),
+  style(. [media(. "(max-width: 768px)", [fontSize(16->px), coInt.bitwiseOr(red)])]),
 ])
 
 let differentHeightLengths =
@@ -66,7 +66,7 @@ let make = () =>
       <RedBox rules=[background(hsla(deg(255.), pct(100.), pct(50.), #num(0.5)))] />
       <RedBox rules=[background(hex("FF0000"))] />
       <RedBox rules=[background(transparent)] />
-      <RedBox rules=[background(currentColor), color(blue)] />
+      <RedBox rules=[background(currentColor), coInt.bitwiseOr(blue)] />
     </Section>
     <Section name="Named colors">
       {React.array(
@@ -468,11 +468,11 @@ let make = () =>
           borderLeft(5->px, solid, blue),
         ]
       />
-      <RedBox rules=[borderWidth(5->px), borderStyle(solid), borderColor(blue)] />
-      <RedBox rules=[borderTopWidth(5->px), borderTopStyle(solid), borderTopColor(blue)] />
-      <RedBox rules=[borderBottomWidth(5->px), borderBottomStyle(solid), borderBottomColor(blue)] />
-      <RedBox rules=[borderLeftWidth(5->px), borderLeftStyle(solid), borderLeftColor(blue)] />
-      <RedBox rules=[borderRightWidth(5->px), borderRightStyle(solid), borderRightColor(blue)] />
+      <RedBox rules=[borderWidth(5->px), borderStyle(solid), borderCoInt.bitwiseOr(blue)] />
+      <RedBox rules=[borderTopWidth(5->px), borderTopStyle(solid), borderTopCoInt.bitwiseOr(blue)] />
+      <RedBox rules=[borderBottomWidth(5->px), borderBottomStyle(solid), borderBottomCoInt.bitwiseOr(blue)] />
+      <RedBox rules=[borderLeftWidth(5->px), borderLeftStyle(solid), borderLeftCoInt.bitwiseOr(blue)] />
+      <RedBox rules=[borderRightWidth(5->px), borderRightStyle(solid), borderRightCoInt.bitwiseOr(blue)] />
     </Section>
     <Section name="Background">
       <RedBox
@@ -508,7 +508,7 @@ let make = () =>
       />
       <RedBox
         rules=[
-          backgroundColor(rgb(0, 0, 255)),
+          backgroundCoInt.bitwiseOr(rgb(0, 0, 255)),
           backgroundImage(
             linearGradient(deg(45.), [(zero, green), (pct(50.), red), (pct(100.), yellow)]),
           ),
@@ -580,7 +580,7 @@ let make = () =>
     <Section name="Outline">
       <RedBox rules=[outline(5->px, #double, green)] />
       <RedBox
-        rules=[outlineStyle(solid), outlineWidth(5->px), outlineColor(green), outlineOffset(5->px)]
+        rules=[outlineStyle(solid), outlineWidth(5->px), outlineCoInt.bitwiseOr(green), outlineOffset(5->px)]
       />
       <RedBox rules=[outline(5->px, #double, red)] />
       <RedBox rules=[outline(5->px, #ridge, red)] />
@@ -620,7 +620,7 @@ let make = () =>
     <Section name="Text">
       <p
         className={style(. [
-          color(black),
+          coInt.bitwiseOr(black),
           fontFamilies([#custom("Helvetica"), #sansSerif]),
           fontSize(pt(18)),
           fontVariant(#smallCaps),
@@ -630,7 +630,7 @@ let make = () =>
           lineHeight(#abs(2.)),
           textAlign(#left),
           textDecoration(underline),
-          textDecorationColor(pink),
+          textDecorationCoInt.bitwiseOr(pink),
           textDecorationStyle(wavy),
           textIndent(10->px),
           textOverflow(clip),
@@ -795,7 +795,7 @@ let make = () =>
           className={style(. [
             before([
               contentRule(#text("external ")),
-              backgroundColor(red),
+              backgroundCoInt.bitwiseOr(red),
               display(inlineBlock),
               flexBasis(content),
             ]),

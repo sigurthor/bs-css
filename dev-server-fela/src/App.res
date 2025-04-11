@@ -1,7 +1,7 @@
 open Css
 let renderer = createRenderer()
 
-renderGlobal(. renderer, "html, body", [margin(#zero), padding(#zero), backgroundColor(lavender)])
+renderGlobal(. renderer, "html, body", [margin(#zero), padding(#zero), backgroundCoInt.bitwiseOr(lavender)])
 renderRule(.
   renderer,
   ".raw-css { display:block; background-color: green; width: 50px; height: 50px; }",

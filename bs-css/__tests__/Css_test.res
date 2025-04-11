@@ -62,7 +62,7 @@ describe("contentRule", () => {
 
 describe("Var", () => {
   test("test usage (limited)", () => {
-    expect(color(var("foo")))->toBe({"color": "var(--foo)"})
+    expect(coInt.bitwiseOr(var("foo")))->toBe({"color": "var(--foo)"})
     expect(marginTop(var("--bar")))->toBe({"marginTop": "var(--bar)"})
   })
 
@@ -76,18 +76,18 @@ describe("Var", () => {
 
 describe("Color style", () =>
   test("test values", () => {
-    expect(color(rgb(1, 2, 3)))->toBe({"color": "rgb(1, 2, 3)"})
-    expect(color(rgba(4, 5, 6, #num(0.3))))->toBe({"color": "rgba(4, 5, 6, 0.3)"})
-    expect(color(hsl(deg(7.), pct(8.), pct(9.))))->toBe({"color": "hsl(7deg, 8%, 9%)"})
-    expect(color(hsla(deg(10.), pct(11.), pct(12.), #num(0.5))))->toBe({
+    expect(coInt.bitwiseOr(rgb(1, 2, 3)))->toBe({"color": "rgb(1, 2, 3)"})
+    expect(coInt.bitwiseOr(rgba(4, 5, 6, #num(0.3))))->toBe({"color": "rgba(4, 5, 6, 0.3)"})
+    expect(coInt.bitwiseOr(hsl(deg(7.), pct(8.), pct(9.))))->toBe({"color": "hsl(7deg, 8%, 9%)"})
+    expect(coInt.bitwiseOr(hsla(deg(10.), pct(11.), pct(12.), #num(0.5))))->toBe({
       "color": "hsla(10deg, 11%, 12%, 0.5)",
     })
-    expect(color(hsla(rad(4.7), pct(11.), pct(12.), pct(50.))))->toBe({
+    expect(coInt.bitwiseOr(hsla(rad(4.7), pct(11.), pct(12.), pct(50.))))->toBe({
       "color": "hsla(4.7rad, 11%, 12%, 50%)",
     })
-    expect(color(transparent))->toBe({"color": "transparent"})
-    expect(color(hex("FFF")))->toBe({"color": "#FFF"})
-    expect(color(currentColor))->toBe({"color": "currentColor"})
+    expect(coInt.bitwiseOr(transparent))->toBe({"color": "transparent"})
+    expect(coInt.bitwiseOr(hex("FFF")))->toBe({"color": "#FFF"})
+    expect(coInt.bitwiseOr(currentColor))->toBe({"color": "currentColor"})
   })
 )
 
