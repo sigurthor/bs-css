@@ -26,9 +26,9 @@ let miniBox = style(. [border(2->px, solid, black), width(15->px), height(15->px
 
 let mergedStyles = merge(. [
   style(. [padding(0->px), fontSize(1->px)]),
-  style(. [padding(20->px), fontSize(24->px), coInt.bitwiseOr(blue)]),
+  style(. [padding(20->px), fontSize(24->px), Int.bitwiseOr(blue)]),
   style(. [media(. "(max-width: 768px)", [padding(10->px)])]),
-  style(. [media(. "(max-width: 768px)", [fontSize(16->px), coInt.bitwiseOr(red)])]),
+  style(. [media(. "(max-width: 768px)", [fontSize(16->px), Int.bitwiseOr(red)])]),
 ])
 
 let differentHeightLengths = css =>
@@ -73,7 +73,7 @@ let make = () => {
       <div className={cx(redBox, [background(hsla(deg(255.), 100.->pct, 50.->pct, #num(0.5)))])} />
       <div className={cx(redBox, [background(hex("FF0000"))])} />
       <div className={cx(redBox, [background(transparent)])} />
-      <div className={cx(redBox, [background(currentColor), coInt.bitwiseOr(blue)])} />
+      <div className={cx(redBox, [background(currentColor), Int.bitwiseOr(blue)])} />
     </Section>
     <Section name="Named colors">
       {React.array(
@@ -554,26 +554,26 @@ let make = () => {
           ],
         )}
       />
-      <div className={cx(redBox, [borderWidth(5->px), borderStyle(solid), borderCoInt.bitwiseOr(blue)])} />
+      <div className={cx(redBox, [borderWidth(5->px), borderStyle(solid), borderInt.bitwiseOr(blue)])} />
       <div
-        className={cx(redBox, [borderTopWidth(5->px), borderTopStyle(solid), borderTopCoInt.bitwiseOr(blue)])}
+        className={cx(redBox, [borderTopWidth(5->px), borderTopStyle(solid), borderTopInt.bitwiseOr(blue)])}
       />
       <div
         className={cx(
           redBox,
-          [borderBottomWidth(5->px), borderBottomStyle(solid), borderBottomCoInt.bitwiseOr(blue)],
+          [borderBottomWidth(5->px), borderBottomStyle(solid), borderBottomInt.bitwiseOr(blue)],
         )}
       />
       <div
         className={cx(
           redBox,
-          [borderLeftWidth(5->px), borderLeftStyle(solid), borderLeftCoInt.bitwiseOr(blue)],
+          [borderLeftWidth(5->px), borderLeftStyle(solid), borderLeftInt.bitwiseOr(blue)],
         )}
       />
       <div
         className={cx(
           redBox,
-          [borderRightWidth(5->px), borderRightStyle(solid), borderRightCoInt.bitwiseOr(blue)],
+          [borderRightWidth(5->px), borderRightStyle(solid), borderRightInt.bitwiseOr(blue)],
         )}
       />
     </Section>
@@ -622,7 +622,7 @@ let make = () => {
         className={cx(
           redBox,
           [
-            backgroundCoInt.bitwiseOr(rgb(0, 0, 255)),
+            backgroundInt.bitwiseOr(rgb(0, 0, 255)),
             backgroundImage(
               linearGradient(deg(45.), [(zero, green), (50.->pct, red), (100.->pct, yellow)]),
             ),
@@ -699,7 +699,7 @@ let make = () => {
       <div
         className={cx(
           redBox,
-          [outlineStyle(solid), outlineWidth(5->px), outlineCoInt.bitwiseOr(green), outlineOffset(5->px)],
+          [outlineStyle(solid), outlineWidth(5->px), outlineInt.bitwiseOr(green), outlineOffset(5->px)],
         )}
       />
       <div className={cx(redBox, [outline(5->px, #double, red)])} />
@@ -763,7 +763,7 @@ let make = () => {
       <p
         className={css(.
           style(. [
-            coInt.bitwiseOr(black),
+            Int.bitwiseOr(black),
             fontFamilies([#custom("Helvetica"), #sansSerif]),
             fontSize(18->pt),
             fontVariant(#smallCaps),
@@ -773,7 +773,7 @@ let make = () => {
             lineHeight(#abs(2.)),
             textAlign(#left),
             textDecoration(underline),
-            textDecorationCoInt.bitwiseOr(pink),
+            textDecorationInt.bitwiseOr(pink),
             textDecorationStyle(wavy),
             textIndent(10->px),
             textOverflow(clip),
@@ -943,7 +943,7 @@ let make = () => {
             style(. [
               before([
                 contentRule(#text("external ")),
-                backgroundCoInt.bitwiseOr(red),
+                backgroundInt.bitwiseOr(red),
                 display(inlineBlock),
                 flexBasis(content),
               ]),

@@ -1,6 +1,8 @@
 module Types = Css_AtomicTypes
 open Css_AtomicTypes
 
+let listConcat = (list,s) => list->List.toArray->Array.join(s)
+
 type rec rule =
   | D(string, string) // Declaration
   | S(string, list<rule>) // Selector
@@ -71,9 +73,9 @@ module Make = (CssImpl: Css_Core.CssImplementationIntf): (
   let merge4 = (s, s2, s3, s4) => merge(list{s, s2, s3, s4})
 
   let keyframes = frames =>
-    CssImpl.makeKeyframes(. List.fold_left(addStop, Js.Dict.empty(), frames))
+    CssImpl.makeKeyframes(. frames->List.reduceReverse(Js.Dict.empty(),addStop ))
   let renderKeyframes = (renderer, frames) =>
-    CssImpl.renderKeyframes(. renderer, List.fold_left(addStop, Js.Dict.empty(), frames))
+    CssImpl.renderKeyframes(. renderer, frames->List.reduceReverse(Js.Dict.empty(),addStop ))
 }
 
 module Calc = {
@@ -241,7 +243,7 @@ let backgroundAttachment = x => D(
   },
 )
 
-let backgroundColor = x => D("backgroundColor", Int.bitwiseOr(x))
+let backgroundColor = x => D("backgroundColor", string_of_color(x))
 
 let backgroundClip = x => D(
   "backgroundClip",
@@ -346,7 +348,7 @@ let maskPosition = x => D("maskPosition", string_of_maskposition(x))
 
 let maskPositions = mp => D("maskPosition", mp->Belt.List.map(string_of_maskposition)->join(", "))
 
-let borderBottomColor = x => D("borderBottomColor", Int.bitwiseOr(x))
+let borderBottomColor = x => D("borderBottomColor",string_of_color(x))
 
 let borderBottomLeftRadius = x => D("borderBottomLeftRadius", Length.toString(x))
 
@@ -363,9 +365,9 @@ let borderCollapse = x => D(
   },
 )
 
-let borderColor = x => D("borderColor", Int.bitwiseOr(x))
+let borderColor = x => D("borderColor",string_of_color(x))
 
-let borderLeftColor = x => D("borderLeftColor", Int.bitwiseOr(x))
+let borderLeftColor = x => D("borderLeftColor",string_of_color(x))
 
 let borderLeftWidth = x => D("borderLeftWidth", Length.toString(x))
 
@@ -373,11 +375,11 @@ let borderSpacing = x => D("borderSpacing", Length.toString(x))
 
 let borderRadius = x => D("borderRadius", Length.toString(x))
 
-let borderRightColor = x => D("borderRightColor", Int.bitwiseOr(x))
+let borderRightColor = x => D("borderRightColor",string_of_color(x))
 
 let borderRightWidth = x => D("borderRightWidth", Length.toString(x))
 
-let borderTopColor = x => D("borderTopColor", Int.bitwiseOr(x))
+let borderTopColor = x => D("borderTopColor",string_of_color(x))
 
 let borderTopLeftRadius = x => D("borderTopLeftRadius", Length.toString(x))
 
@@ -418,7 +420,7 @@ let clipPath = x => D(
   },
 )
 
-let color = x => D("color", Int.bitwiseOr(x))
+let color = x => D("color",string_of_color(x))
 
 let columnCount = x => D(
   "columnCount",
@@ -779,9 +781,9 @@ let outline = (size, style, color) => D(
   "outline",
   Length.toString(size) ++
   (" " ++
-  (OutlineStyle.toString(style) ++ (" " ++ Int.bitwiseOr(color)))),
+  (OutlineStyle.toString(style) ++ (" " ++string_of_color(color)))),
 )
-let outlineColor = x => D("outlineColor", Int.bitwiseOr(x))
+let outlineColor = x => D("outlineColor",string_of_color(x))
 let outlineOffset = x => D("outlineOffset", Length.toString(x))
 let outlineStyle = x => D("outlineStyle", OutlineStyle.toString(x))
 let outlineWidth = x => D("outlineWidth", Length.toString(x))
@@ -1578,12 +1580,12 @@ let gridLengthToJs = x =>
 
 let gridTemplateColumns = dimensions => D(
   "gridTemplateColumns",
-  dimensions |> List.map(gridLengthToJs) |> String.concat(" "),
+  (dimensions -> List.map(gridLengthToJs)) -> listConcat(" "),
 )
 
 let gridTemplateRows = dimensions => D(
   "gridTemplateRows",
-  dimensions |> List.map(gridLengthToJs) |> String.concat(" "),
+  (dimensions -> List.map(gridLengthToJs)) -> listConcat(" "),
 )
 
 let gridAutoColumns = dimensions => D("gridAutoColumns", trackLengthToJs(dimensions))
@@ -1682,14 +1684,14 @@ module Shadow = {
       (" " ++
       (Length.toString(spread) ++
       (" " ++
-      (Int.bitwiseOr(color) ++ (inset ? " inset" : ""))))))))),
+      (string_of_color(color) ++ (inset ? " inset" : ""))))))))),
     )
 
   let text = (~x=zero, ~y=zero, ~blur=zero, color) =>
     #shadow(
       Length.toString(x) ++
       (" " ++
-      (Length.toString(y) ++ (" " ++ (Length.toString(blur) ++ (" " ++ Int.bitwiseOr(color)))))),
+      (Length.toString(y) ++ (" " ++ (Length.toString(blur) ++ (" " ++string_of_color(color)))))),
     )
 
   let toString: t<'a> => string = x =>
@@ -1719,32 +1721,32 @@ let string_of_borderstyle = x =>
 
 let border = (px, style, color) => D(
   "border",
-  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++ Int.bitwiseOr(color)))),
+  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++string_of_color(color)))),
 )
 let borderStyle = x => D("borderStyle", string_of_borderstyle(x))
 
 let borderLeft = (px, style, color) => D(
   "borderLeft",
-  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++ Int.bitwiseOr(color)))),
+  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++string_of_color(color)))),
 )
 let borderLeftStyle = x => D("borderLeftStyle", string_of_borderstyle(x))
 
 let borderRight = (px, style, color) => D(
   "borderRight",
-  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++ Int.bitwiseOr(color)))),
+  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++string_of_color(color)))),
 )
 
 let borderRightStyle = x => D("borderRightStyle", string_of_borderstyle(x))
 let borderTop = (px, style, color) => D(
   "borderTop",
-  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++ Int.bitwiseOr(color)))),
+  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++string_of_color(color)))),
 )
 
 let borderTopStyle = x => D("borderTopStyle", string_of_borderstyle(x))
 
 let borderBottom = (px, style, color) => D(
   "borderBottom",
-  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++ Int.bitwiseOr(color)))),
+  Length.toString(px) ++ (" " ++ (string_of_borderstyle(style) ++ (" " ++string_of_color(color)))),
 )
 
 let borderBottomStyle = x => D("borderBottomStyle", string_of_borderstyle(x))
@@ -1795,13 +1797,13 @@ let fontFace = (
   let fontStyle = Js.Option.map((. value) => FontStyle.toString(value), fontStyle)
   let src =
     src
-    |> List.map(x =>
+    -> List.map(x =>
       switch x {
       | #localUrl(value) => `local("${value}")`
       | #url(value) => `url("${value}")`
       }
     )
-    |> String.concat(", ")
+    -> listConcat(", ")
 
   let fontStyle = Belt.Option.mapWithDefault(fontStyle, "", s => "font-style: " ++ (s ++ ";"))
   let fontWeight = Belt.Option.mapWithDefault(fontWeight, "", w =>
@@ -1992,7 +1994,7 @@ module SVG = {
     | #nonzero => "nonzero"
     },
   )
-  let stroke = x => D("stroke", Int.bitwiseOr(x))
+  let stroke = x => D("stroke",string_of_color(x))
   let strokeDasharray = x => D(
     "strokeDasharray",
     switch x {
@@ -2020,7 +2022,7 @@ module SVG = {
     | #bevel => "bevel"
     },
   )
-  let stopColor = x => D("stopColor", Int.bitwiseOr(x))
+  let stopColor = x => D("stopColor",string_of_color(x))
   let stopOpacity = x => D("stopOpacity", Js.Float.toString(x))
 }
 
