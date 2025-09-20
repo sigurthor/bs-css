@@ -11,13 +11,13 @@ include Css_Js_Core.Make({
   @send
   external renderStaticString: (renderer, string) => unit = "renderStatic"
 
-  let injectRaw = (. _css) => throw(NotImplemented)
+  let injectRaw = (. _css) => raise(NotImplemented)
   let renderRaw = (. renderer, css) => renderStaticString(renderer, css)
 
   @send
   external renderStatic: (renderer, Js.Json.t, string) => unit = "renderStatic"
 
-  let injectRules = (. _selector, _rules) => throw(NotImplemented)
+  let injectRules = (. _selector, _rules) => raise(NotImplemented)
   let renderRules = (. renderer, selector, rules: Js.Json.t) =>
     renderStatic(renderer, rules, selector)
   let make = (. rules) => rules
@@ -31,7 +31,7 @@ include Css_Js_Core.Make({
   external felaRenderKeyframes: (renderer, (. 'a) => Js.Dict.t<Js.Json.t>, Js.Json.t) => string =
     "renderKeyframe"
 
-  let makeKeyframes = (. _) => throw(NotImplemented)
+  let makeKeyframes = (. _) => raise(NotImplemented)
 
   let renderKeyframes = (. renderer, frames) =>
     renderer->felaRenderKeyframes((. _props) => frames, Js.Json.object_(Js.Dict.empty()))

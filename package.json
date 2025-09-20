@@ -3,11 +3,6 @@
     "packageManager": "yarn@4.3.1",
     "workspaces": [
         "bs-css",
-        "bs-css-dom",
-        "bs-css-emotion",
-        "bs-css-fela",
-        "dev-server-dom",
-        "dev-server-emotion",
-        "dev-server-fela"
+        "bs-css-emotion"
     ]
 }

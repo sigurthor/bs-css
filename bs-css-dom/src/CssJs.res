@@ -9,11 +9,11 @@ include Css_Js_Core.Make({
   external unsafeJsonCast: Js.Json.t => styleEncoding = "%identity"
   external unsafeJsCast: Js.t<'a> => styleEncoding = "%identity"
 
-  let injectRaw = (. _) => throw(NotImplemented)
-  let renderRaw = (. _, _) => throw(NotImplemented)
+  let injectRaw = (. _) => raise(NotImplemented)
+  let renderRaw = (. _, _) => raise(NotImplemented)
 
-  let injectRules = (. _, _) => throw(NotImplemented)
-  let renderRules = (. _, _, _) => throw(NotImplemented)
+  let injectRules = (. _, _) => raise(NotImplemented)
+  let renderRules = (. _, _, _) => raise(NotImplemented)
 
   let mergeStyles = (. styles) =>
     Belt.Array.reduce(styles, Js.Obj.empty(), (acc, item) =>
@@ -22,6 +22,6 @@ include Css_Js_Core.Make({
 
   let make = (. rules) => rules->unsafeJsonCast
 
-  let makeKeyframes = (. _) => throw(NotImplemented)
-  let renderKeyframes = (. _, _) => throw(NotImplemented)
+  let makeKeyframes = (. _) => raise(NotImplemented)
+  let renderKeyframes = (. _, _) => raise(NotImplemented)
 })
